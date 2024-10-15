@@ -37,12 +37,24 @@ function ToDo(){
         setTasks([...tasks, newTask]);
         setNewTask('');
     }
+    const deleteTask = (index) => {
+        setTasks(tasks.filter((task, i) => i !== index));
+      };
     
     return(
         <>
         <h1>Todo App Using React</h1>
-        <input type="text" name="" id="" placeholder="Enter New Task Here"/>
-        <button>Add</button>
+        <input type="text" name="" id="" placeholder="Enter New Task Here" value={newTask} onChange={(e) => setNewTask(e.target.value)}/>
+        <button onClick={addTask}>Add</button>
+        <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
+            {task}
+            <button onClick={() => deleteTask(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+
         </>
     )
 }
